@@ -1,5 +1,6 @@
 package com.klef.jfsd.donation.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.klef.jfsd.donation.model.Donation;
 import com.klef.jfsd.donation.model.Donor;
+import com.klef.jfsd.donation.model.Recipient;
 import com.klef.jfsd.donation.repository.DonationRepository;
 import com.klef.jfsd.donation.service.DonationService;
 
@@ -26,6 +28,11 @@ public class DonationController {
     
     @Autowired
     private DonationRepository donationRepository;
+    
+    
+    @Autowired
+    private HttpSession session;
+    
 
     @GetMapping("donations")
     public String showDonationForm(Model model) {
@@ -53,6 +60,8 @@ public class DonationController {
         return "donationList"; // Return the view name
     }
     
+       
+    
     
     @GetMapping("/viewDonations")
     public String viewDonations(Model model) {
@@ -64,7 +73,80 @@ public class DonationController {
     
     @GetMapping("/updatestatusofdonation")
     public String updateDonationStatus(@RequestParam("id") Long id, @RequestParam("status") String status) {
-        donationRepository.updatedonationstatus(status, id);
+    	 Recipient recipient = (Recipient) session.getAttribute("recipient");
+
+    	    if (recipient == null) {
+    	        // Handle the case where the recipient is not found in session (optional)
+    	        return "redirect:/login";  // Redirect to the login page or show an error message
+    	    }
+
+    	    Long reqId = (long)recipient.getId();
+    	    String dest=recipient.getLocation();
+        donationRepository.updateDonationStatusAndRequestedId(status,reqId ,dest,id);
         return "redirect:/viewDonations"; // Redirect back to the donation list page
     }
+    
+    
+    
+    
+//    @RequestMapping("/myrequesteddonations")
+//    public String getDonationsByRequestedId(HttpSession session, Model model) {
+//        // Assuming that the recipient is stored in the session
+//        Recipient recipient = (Recipient) session.getAttribute("recipient");
+//
+//        if (recipient == null) {
+//            return "redirect:/login"; // Redirect to login if recipient is not found in session
+//        }
+//
+//        Long requestedId = (long) recipient.getId();
+//        // Call the service to get donations by requestedId and status "Requested"
+//        List<Donation> donations = donationService.getDonationsByRequestedIdAndStatus(requestedId);
+//        model.addAttribute("donationList", donations);
+//        return "myrequestlist"; // Return the view name
+//    }
+    @RequestMapping("/myrequesteddonations")
+    public String getDonationsByRequestedId(HttpSession session, Model model) {
+        // Assuming that the recipient is stored in the session
+        Recipient recipient = (Recipient) session.getAttribute("recipient");
+
+        if (recipient == null) {
+            return "redirect:/login"; // Redirect to login if recipient is not found in session
+        }
+
+        Long requestedId = (long) recipient.getId();
+        // Define the statuses to filter donations
+        List<String> statuses = Arrays.asList("Requested", "OnTheWay", "Donated");
+
+        // Call the service to get donations by requestedId and statuses
+        List<Donation> donations = donationService.getDonationsByRequestedIdAndStatuses(requestedId, statuses);
+        model.addAttribute("donationList", donations);
+        return "myrequestlist"; // Return the view name
+    }
+
+    
+    
+    
+    @GetMapping("/viewlcDonations")
+    public String viewlcDonations(Model model) {
+        List<Donation> donationList = donationRepository.findAll();
+        model.addAttribute("donationList", donationList);
+        return "lcrequestlist"; // JSP file
+    }
+    
+    
+    @GetMapping("/updatelcofdonation")
+    public String updatelcDonationStatus(@RequestParam("id") Long id, @RequestParam("status") String status) {
+        donationRepository.updatelcStatus(id,status);
+        return "redirect:/viewlcDonations"; // Redirect back to the donation list page
+    }
+    
+    
+    
+    @GetMapping("/lchistory")
+    public String lchistory(Model model) {
+        List<Donation> donationList = donationRepository.findAll();
+        model.addAttribute("donationList", donationList);
+        return "lchistory"; 
+    
+}
 }

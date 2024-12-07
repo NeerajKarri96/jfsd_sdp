@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="com.klef.jfsd.donation.model.Recipient"%>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View All Donations</title>
+    <title>View Requested Donations</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Table container styling */
@@ -82,7 +80,7 @@
 
     <div class="main-content">
         <div class="table-container">
-            <h3>View All Donations</h3>
+            <h3>View Requested Donations</h3>
             <table>
                 <thead>
                     <tr>
@@ -92,7 +90,6 @@
                         <th>Location</th>
                         <th>Description</th>
                         <th>Status</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,17 +102,6 @@
                             <td><c:out value="${donation.location}" /></td>
                             <td><c:out value="${donation.description}" /></td>
                             <td><c:out value="${donation.status}" /></td>
-<td>
-    <!-- Accept button for donation -->
-    <a class="accept-link" 
-       href='<c:url value="updatestatusofdonation?id=${donation.id}&status=Requested" />'>
-       Accept
-    </a>
-        <a class="accept-link" 
-       href='<c:url value="updatestatusofdonation?id=${donation.id}&status=Inprogress" />'>
-       Reset
-    </a>
-</td>
                         </tr>
                     </c:forEach>
                 </tbody>

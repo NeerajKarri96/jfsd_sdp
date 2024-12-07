@@ -30,20 +30,24 @@ public class Donation {
 
     @Column(name = "requested_id")
     private Long requestedId;  // Adding requestedId field
+    
+    @Column(name = "destination", length = 255) // New destination field
+    private String destination; // New destination attribute
 
     // Default constructor
     public Donation() {
     }
 
-    // Parameterized constructor with requestedId
-    public Donation(Long donorId, String product, int count, String location, String description, String status, Long requestedId) {
+    // Parameterized constructor with destination
+    public Donation(Long donorId, String product, int count, String location, String description, String status, Long requestedId, String destination) {
         this.donorId = donorId;
         this.product = product;
         this.count = count;
         this.location = location;
         this.description = description;
         this.status = status;
-        this.requestedId = requestedId;  // Initialize requestedId field
+        this.requestedId = requestedId;
+        this.destination = destination;  // Initialize destination field
     }
 
     // Getters and Setters
@@ -111,7 +115,15 @@ public class Donation {
         this.requestedId = requestedId;
     }
 
-    // toString method including requestedId
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    // toString method including destination
     @Override
     public String toString() {
         return "Donation{" +
@@ -122,7 +134,8 @@ public class Donation {
                ", location='" + location + '\'' +
                ", description='" + description + '\'' +
                ", status='" + status + '\'' +
-               ", requestedId=" + requestedId +  // Including requestedId in toString
+               ", requestedId=" + requestedId +
+               ", destination='" + destination + '\'' +  // Including destination in toString
                '}';
     }
 }

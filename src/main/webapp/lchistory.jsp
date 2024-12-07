@@ -75,10 +75,36 @@
                 padding: 8px;
             }
         }
+        
+                /* Button styling for the links */
+        .accept-link1 {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 14px;
+            text-align: center;
+            background-color: #FE8D01;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+                .accept-link2 {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 14px;
+            text-align: center;
+            background-color: #00ab41;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
     </style>
 </head>
 <body>
-    <%@include file="recipnav.jsp" %>
+    <%@include file="lcNav.jsp" %>
 
     <div class="main-content">
         <div class="table-container">
@@ -90,9 +116,9 @@
                         <th>Product</th>
                         <th>Count</th>
                         <th>Location</th>
+                        <th>Destination</th>
                         <th>Description</th>
                         <th>Status</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,19 +129,9 @@
                             <td><c:out value="${donation.product}" /></td>
                             <td><c:out value="${donation.count}" /></td>
                             <td><c:out value="${donation.location}" /></td>
+                            <td><c:out value="${donation.destination}" /></td>
                             <td><c:out value="${donation.description}" /></td>
                             <td><c:out value="${donation.status}" /></td>
-<td>
-    <!-- Accept button for donation -->
-    <a class="accept-link" 
-       href='<c:url value="updatestatusofdonation?id=${donation.id}&status=Requested" />'>
-       Accept
-    </a>
-        <a class="accept-link" 
-       href='<c:url value="updatestatusofdonation?id=${donation.id}&status=Inprogress" />'>
-       Reset
-    </a>
-</td>
                         </tr>
                     </c:forEach>
                 </tbody>

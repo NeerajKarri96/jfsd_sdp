@@ -13,7 +13,7 @@
                     <nav class="navbar1">
       <div class="logo">
         <img src="images/icon1.jpg" alt="Help Bridge Logo" style="height: 40px; margin-right: 10px; vertical-align: middle;">
-        <a href="#home" style="color: white;">HelpBridge</a>
+        <a href="donorhome" style="color: white;">HelpBridge</a>
       </div>
       </nav>
         <ul class="navbar-menu">
@@ -22,7 +22,12 @@
             <li><a href="mydonations">Donated Product</a></li>
             <li><a href="displayOrders">Donated Money</a></li>
             <li><a href="donorprofile">Profile</a></li>
-            <li><a href="logout">Logout</a></li>
+            <li class="dropdown">
+                <a href="#">Donor</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/">Logout</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </body>

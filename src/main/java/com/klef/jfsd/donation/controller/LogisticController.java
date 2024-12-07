@@ -114,4 +114,14 @@ public class LogisticController
         mv.setViewName("logisticprofile");
         return mv;
     }
+    
+    
+    @GetMapping("logistichome")
+    public ModelAndView logistichome()
+    {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("logistichome");
+        return mv;
+    }
+    
 }

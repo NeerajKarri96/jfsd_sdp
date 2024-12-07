@@ -115,7 +115,7 @@
             <textarea id="description" name="description" placeholder="Enter Description" required>${donation.description}</textarea><br>
 
             <!-- Hidden status field with default value of "donated" -->
-            <input type="hidden" id="status" name="status" value="donated">
+            <input type="hidden" id="status" name="status" value="Inprogress">
 
             <button type="submit">Submit Donation</button>
         </form>

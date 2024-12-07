@@ -18,8 +18,25 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
 
 	    List<Donation> findByDonorId(Long donorId); // Custom query to find donations by donorId
 	    
-	    @Query("update Donation d set d.status=?1 where d.id=?2")
+	    
+	    List<Donation> findByRequestedIdAndStatus(Long requestedId, String status);
+	    List<Donation> findByRequestedIdAndStatusIn(Long requestedId, List<String> statuses);
+
+	    
+//	    @Query("update Donation d set d.status=?1 where d.id=?2")
+//	    @Modifying  // DML operation
+//	    @Transactional  // Enables auto-commit
+//	    public int updatedonationstatus(String status, Long donationId);
+	    
+	    
+	    @Query("update Donation d set d.status = ?1, d.requestedId = ?2,d.destination = ?3 where d.id = ?4")
 	    @Modifying  // DML operation
 	    @Transactional  // Enables auto-commit
-	    public int updatedonationstatus(String status, Long donationId);
+	    public int updateDonationStatusAndRequestedId(String status, Long requestedId,String dist, Long donationId);
+
+	    
+	    @Query("update Donation d set d.status = ?2 where d.id = ?1")
+	    @Modifying  // DML operation
+	    @Transactional  // Enables auto-commit
+	    public int updatelcStatus(Long donationId,String status );
 }

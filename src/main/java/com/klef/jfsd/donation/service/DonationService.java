@@ -21,9 +21,17 @@ public class DonationService {
         return donationRepository.findByDonorId(donorId); // Assuming you have this method in your repository
     }
     
-    
-    public String updatedonationstatus(String status, Long donationId) {
-        donationRepository.updatedonationstatus(status, donationId);
-        return "Donation Status Updated Successfully";
+    public List<Donation> getDonationsByRequestedIdAndStatus(Long requestedId) {
+        return donationRepository.findByRequestedIdAndStatus(requestedId, "Requested");
     }
+    
+    public List<Donation> getDonationsByRequestedIdAndStatuses(Long requestedId, List<String> statuses) {
+        return donationRepository.findByRequestedIdAndStatusIn(requestedId, statuses);
+    }
+
+    
+//    public String updatedonationstatus(String status, Long donationId) {
+//        donationRepository.updatedonationstatus(status, donationId);
+//        return "Donation Status Updated Successfully";
+//    }
 }

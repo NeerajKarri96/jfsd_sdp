@@ -74,6 +74,7 @@ public class RecipientController
 	     String remail = request.getParameter("remail");
 	     String rpwd = request.getParameter("rpwd");
 	     
+	     
 	     Recipient recipient =  recipientService.checkerecipientlogin(remail, rpwd);
 	     
 	     if(recipient!=null && ("Accepted").equalsIgnoreCase(recipient.getStatus()) )

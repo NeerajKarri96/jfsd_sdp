@@ -13,14 +13,19 @@
                     <nav class="navbar1">
       <div class="logo">
         <img src="images/icon1.jpg" alt="Help Bridge Logo" style="height: 40px; margin-right: 10px; vertical-align: middle;">
-        <a href="#home" style="color: white;">HelpBridge</a>
+        <a href="recipienthome" style="color: white;">HelpBridge</a>
       </div>
       </nav>
         <ul class="navbar-menu">
-            <li><a href="#">Request</a></li>
-            <li><a href="#">My Requests</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Logout</a></li>
+            <li><a href="viewDonations">Request</a></li>
+            <li><a href="myrequesteddonations">My Requests</a></li>
+            <li><a href="recipientprofile">Profile</a></li>
+             <li class="dropdown">
+                <a href="#">Recipent</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/">Logout</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </body>
